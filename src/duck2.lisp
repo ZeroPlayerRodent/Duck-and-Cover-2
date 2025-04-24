@@ -33,7 +33,7 @@ xxxxxxxx
 )
 
 (loadsprite 3
-...x....
+x..x...x
 ...x....
 ....x.x.
 x...x...
@@ -80,7 +80,9 @@ xxxxxxxx
 (setsprite 1 1)
 (setsprite 5 1)
 (setsprite 2 2)
+(setsprite 6 2)
 (setsprite 3 3)
+(setsprite 7 3)
 
 (put 7 player0color)
 (put 7 player1color)
@@ -89,7 +91,10 @@ xxxxxxxx
 (put 1 player5color)
 
 (put 12 player2color)
+(put 12 player6color)
+
 (put 2 player3color)
+(put 2 player7color)
 
 (put 0 backgroundcolor)
 (put 6 bordercolor)
@@ -182,9 +187,54 @@ xxxxxxxx
 
 (label resetgame)
 
+(newarray music 9 0 9 0 9 0 9 0 5 0 5 0 5 0 5 0)
+(newarray piano 0 0 0 0 0 0 0 0 0 20 15 20 15 0 15 0 0 0 0 0 0 0 0 0 0 5 10 15 20 25 30 0 0 0 0 0 0 0 0 0 10 0 10 0 10 0 10 0)
+(newvar musicdex 0)
+(newvar pianodex 0)
+(newvar notetime 6)
+(newvar thenote 0)
+
+(put 25 sound2-pulse-hi)
+(put 50 sound1-pulse-hi)
+
+(routine playnote
+  (when (> musicdex 15)
+    (put 0 musicdex)
+  )
+  (when (> pianodex 47)
+    (put 0 pianodex)
+  )
+  (when (> notetime 0)
+    (put (- notetime 1) notetime)
+  )
+  (when (equal notetime 0)
+    (put (index musicdex music) thenote)
+    (when (> thenote 0)
+      (put (index musicdex music) sound1-freq-hi)
+      (playsound1)
+    )
+    (when (equal thenote 0)
+      (mutesound1)
+    )
+
+    (put (index pianodex piano) thenote)
+    (when (> thenote 0)
+      (put (index pianodex piano) sound2-freq-hi)
+      (playsound2)
+    )
+    (when (equal thenote 0)
+      (mutesound2)
+    )
+    (put (+ musicdex 1) musicdex)
+    (put (+ pianodex 1) pianodex)
+    (put 6 notetime)
+  )
+)
+
 (execute wipe)
 
 (put 0 player3y)
+(put 0 player7y)
 
 (put 125 player0x)
 (put 190 player0y)
@@ -195,6 +245,9 @@ xxxxxxxx
 (put 100 player2x)
 (put 0 player2y)
 
+(put 200 player6x)
+(put 0 player6y)
+
 (newvar platx 1)
 (newvar platy 10)
 
@@ -203,8 +256,6 @@ xxxxxxxx
 
 (newvar temp 0)
 (newvar wait 1)
-
-(newvar poptime 0)
 
 (newvar movereset 15)
 
@@ -223,8 +274,6 @@ xxxxxxxx
     (put (+ platx2 1) platx2)
 
     (when (equal platx 24)
-      (playsound2)
-      (put 6 poptime)
       (put 0 temp)
       (loop
         (when (equal temp 6)(break))
@@ -243,8 +292,6 @@ xxxxxxxx
     )
 
     (when (equal platx2 24)
-      (playsound2)
-      (put 6 poptime)
       (put 0 temp)
       (loop
         (when (equal temp 6)(break))
@@ -276,8 +323,12 @@ xxxxxxxx
       (put (+ temp 1) temp)
     )
     (put (+ player3x 8) player3x)
-    (when (> player3x 245)
+    (when (> player3x 220)
       (put 0 player3y)
+    )
+    (put (+ player7x 8) player7x)
+    (when (> player7x 220)
+      (put 0 player7y)
     )
     (addpoints 1)
     (put movereset wait)
@@ -307,8 +358,6 @@ xxxxxxxx
 (newvar p1dead 0)
 (newvar p2dead 0)
 
-(newvar boomtime 0)
-
 (newvar rockettime 5)
 (newvar rocketspeed 5)
 
@@ -328,19 +377,7 @@ xxxxxxxx
 
 (loop
 
-  (when (> boomtime 0)
-    (put (- boomtime 1) boomtime)
-  )
-  (when (equal boomtime 0)
-    (mutesound1)
-  )
-
-  (when (> poptime 0)
-    (put (- poptime 1) poptime)
-  )
-  (when (equal poptime 0)
-    (mutesound2)
-  )
+  (execute playnote)
 
   (put 7 player0color)
   (put 7 player1color)
@@ -479,8 +516,6 @@ xxxxxxxx
     (when (> rocketspeed 15)
       (put 15 rocketspeed)
     )
-    (playsound1)
-    (put 15 boomtime)
     (put player2x player3x)
     (put player2y player3y)
     (put 0 player2y)
@@ -492,8 +527,25 @@ xxxxxxxx
       (put 25 player2x)
     )
   )
+
+  (when (equal (and didhit 64) 64)
+    (put player6x player7x)
+    (put player6y player7y)
+    (put 0 player6y)
+    (when (equal p2dead 0)
+      (put player4x player6x)
+    )
+    (when (equal p1dead 0)
+      (put player0x player6x)
+    )
+  )
+
   (when (equal (and didhit 8) 8)
     (put (- player3y 1) player3y)
+  )
+
+  (when (equal (and didhit 128) 128)
+    (put (- player7y 1) player7y)
   )
 
   (when (> rockettime 0)
@@ -501,6 +553,7 @@ xxxxxxxx
   )
   (when (equal rockettime 0)
     (put (+ player2y rocketspeed) player2y)
+    (put (+ player6y (- rocketspeed 1)) player6y)
     (put 5 rockettime)
   )
   (when (> player2y 230)
@@ -513,13 +566,30 @@ xxxxxxxx
       (put 25 player2x)
     )
   )
+  (when (> player6y 230)
+    (put 0 player6y)
+    (when (equal p2dead 0)
+      (put player4x player6x)
+    )
+    (when (equal p1dead 0)
+      (put player0x player6x)
+    )
+  )
 
   (hitboxes 10 20 5 5)
   (when (collision 2 1)
     (put 1 p1dead)
   )
   (hitboxes 10 20 5 5)
+  (when (collision 6 1)
+    (put 1 p1dead)
+  )
+  (hitboxes 10 20 5 5)
   (when (collision 3 1)
+    (put 1 p1dead)
+  )
+  (hitboxes 10 20 5 5)
+  (when (collision 7 1)
     (put 1 p1dead)
   )
 
@@ -528,7 +598,15 @@ xxxxxxxx
     (put 1 p2dead)
   )
   (hitboxes 10 20 5 5)
+  (when (collision 6 5)
+    (put 1 p2dead)
+  )
+  (hitboxes 10 20 5 5)
   (when (collision 3 5)
+    (put 1 p2dead)
+  )
+  (hitboxes 10 20 5 5)
+  (when (collision 7 5)
     (put 1 p2dead)
   )
 
