@@ -1,3 +1,181 @@
+(customchars)
+
+(loadchar 48
+.xxxxx..
+x.....x.
+x.....x.
+x.....x.
+x.....x.
+x.....x.
+.xxxxx..
+........
+)
+
+(loadchar 49
+..xxx...
+....x...
+....x...
+....x...
+....x...
+....x...
+.xxxxxx.
+........
+)
+
+(loadchar 50
+.xxxxx..
+......x.
+......x.
+.xxxxx..
+x.......
+x.......
+.xxxxxx.
+........
+)
+
+(loadchar 51
+.xxxxx..
+......x.
+......x.
+.xxxxx..
+......x.
+......x.
+.xxxxx..
+........
+)
+
+(loadchar 52
+.x....x.
+.x....x.
+.x....x.
+..xxxxx.
+......x.
+......x.
+......x.
+........
+)
+
+(loadchar 53
+.xxxxxx.
+x.......
+x.......
+xxxxxxx.
+......x.
+......x.
+xxxxxxx.
+........
+)
+
+(loadchar 54
+.xxxxx..
+x.......
+x.......
+xxxxxx..
+x.....x.
+x.....x.
+.xxxxx..
+........
+)
+
+(loadchar 55
+xxxxxxx.
+......x.
+.....x..
+....x...
+...x....
+...x....
+...x....
+........
+)
+
+(loadchar 56
+.xxxxx..
+x.....x.
+x.....x.
+.xxxxx..
+x.....x.
+x.....x.
+.xxxxx..
+........
+)
+
+(loadchar 57
+.xxxxx..
+x.....x.
+x.....x.
+.xxxxx..
+......x.
+......x.
+......x.
+........
+)
+
+(loadchar 96
+........
+........
+........
+........
+........
+........
+........
+........
+)
+
+(loadchar 32
+........
+........
+........
+........
+........
+........
+........
+........
+)
+
+(loadchar 0
+xx.xxx.x
+xxxxxxxx
+x.xxxxxx
+xxxxxx.x
+xxx.xxxx
+xxxxxxxx
+xx.xxxxx
+.x..x..x
+)
+
+(loadchar 1
+xxxxxxxx
+xx..xxx.
+..xx..xx
+xxxxxxxx
+x..xxx..
+.xx..xxx
+xxxxxxxx
+x.x.x.x.
+)
+
+(loadchar 2
+....x...
+....x...
+...x....
+...x....
+....x...
+....x...
+...x....
+...x....
+)
+
+(loadchar 89
+........
+.x......
+.x...x..
+.x...x..
+.x...x.x
+.x.x.x.x
+.x.x.x.x
+.x.x.x.x
+)
+
 (loadsprite 0
 ..xxxx..
 ..x..x..
@@ -97,7 +275,7 @@ xxxxxxxx
 (put 2 player7color)
 
 (put 0 backgroundcolor)
-(put 12 bordercolor)
+(put 0 bordercolor)
 
 (newvar mods 0)
 (newvar modbounce 0)
@@ -146,23 +324,11 @@ xxxxxxxx
 
 (execute wipe)
 
-(newvar cursor 0)
-(newarray title 68 85 67 75 96 65 78 68 96 67 79 86 69 82 96 114 0)
-
-(loop
-  (when (equal (index cursor title) 0)
-    (break)
-  )
-  (plot 1 (+ cursor 8) (- (index cursor title) 64))
-  (plotcolor 1 (+ cursor 8) 1)
-  (put (+ cursor 1) cursor)
-)
-
 (newvar line 0)
 
 (loop
   (when (> line 22) (break))
-  (plot line 30 89)
+  (plot line 30 2)
   (plotcolor line 30 1)
   (put (+ line 1) line)
 )
@@ -170,18 +336,18 @@ xxxxxxxx
 (newvar line2 1)
 (loop
   (when (equal line2 29) (break))
-  (plot 24 line2 160)
+  (plot 24 line2 1)
   (plotcolor 24 line2 6)
   (plotcolor 23 line2 5)
   (put (+ line2 1) line2)
 )
 
-(plot 18 10 160)
-(plot 18 11 160)
-(plot 18 12 160)
-(plot 18 13 160)
-(plot 18 14 160)
-(plot 18 15 160)
+(plot 18 10 0)
+(plot 18 11 0)
+(plot 18 12 0)
+(plot 18 13 0)
+(plot 18 14 0)
+(plot 18 15 0)
 
 (plot 23 10 89)
 (plot 23 11 89)
@@ -337,7 +503,7 @@ xxxxxxxx
     (put 0 temp)
     (loop
       (when (equal temp 6)(break))
-      (plot platy (+ platx temp) 160)
+      (plot platy (+ platx temp) 0)
       (plot 23 (+ platx temp) 89)
       (put (+ temp 1) temp)
     )
@@ -346,7 +512,7 @@ xxxxxxxx
     (put 0 temp)
     (loop
       (when (equal temp 6)(break))
-      (plot platy2 (+ platx2 temp) 160)
+      (plot platy2 (+ platx2 temp) 0)
       (plot 23 (+ platx2 temp) 89)
       (put (+ temp 1) temp)
     )
