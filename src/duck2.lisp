@@ -1,112 +1,112 @@
 (customchars)
 
 (loadchar 48
-.xxxxx..
-x.....x.
-x.....x.
-x.....x.
-x.....x.
-x.....x.
-.xxxxx..
+...xxx..
+..xx.xx.
+..xx.xx.
+..xx.xx.
+..xx.xx.
+..xx.xx.
+...xxx..
 ........
 )
 
 (loadchar 49
 ..xxx...
-....x...
-....x...
-....x...
-....x...
-....x...
-.xxxxxx.
+...xx...
+...xx...
+...xx...
+...xx...
+...xx...
+..xxxx..
 ........
 )
 
 (loadchar 50
-.xxxxx..
-......x.
-......x.
-.xxxxx..
-x.......
-x.......
-.xxxxxx.
+..xxxx..
+..xxxxx.
+.....xx.
+...xxxx.
+..xx....
+..xxxxx.
+..xxxxx.
 ........
 )
 
 (loadchar 51
-.xxxxx..
-......x.
-......x.
-.xxxxx..
-......x.
-......x.
-.xxxxx..
+...xxx..
+..xxxxx.
+.....xx.
+...xxx..
+.....xx.
+..xxxxx.
+...xxx..
 ........
 )
 
 (loadchar 52
-.x....x.
-.x....x.
-.x....x.
+..xx.xx.
+..xx.xx.
+..xx.xx.
 ..xxxxx.
-......x.
-......x.
-......x.
+...xxxx.
+.....xx.
+.....xx.
 ........
 )
 
 (loadchar 53
-.xxxxxx.
-x.......
-x.......
-xxxxxxx.
-......x.
-......x.
-xxxxxxx.
+.xxxxx..
+.xxxxx..
+.xx.....
+.xxxxx..
+....xx..
+.xxxxx..
+.xxxx...
 ........
 )
 
 (loadchar 54
+..xxxx..
 .xxxxx..
-x.......
-x.......
-xxxxxx..
-x.....x.
-x.....x.
+.xx.....
 .xxxxx..
+.xx..xx.
+.xxxxxx.
+..xxxx..
 ........
 )
 
 (loadchar 55
-xxxxxxx.
-......x.
-.....x..
-....x...
-...x....
-...x....
-...x....
+..xxxxx.
+..xxxxx.
+....xx..
+...xxx..
+...xx...
+...xx...
+...xx...
 ........
 )
 
 (loadchar 56
-.xxxxx..
-x.....x.
-x.....x.
-.xxxxx..
-x.....x.
-x.....x.
-.xxxxx..
+...xxx..
+..xx.xx.
+..xx.xx.
+...xxx..
+..xx.xx.
+..xx.xx.
+...xxx..
 ........
 )
 
 (loadchar 57
-.xxxxx..
-x.....x.
-x.....x.
-.xxxxx..
-......x.
-......x.
-......x.
+...xxx..
+..xx.xx.
+..xx.xx.
+...xxxx.
+.....xx.
+.....xx.
+.....xx.
 ........
 )
 
